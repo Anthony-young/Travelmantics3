@@ -30,6 +30,7 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-auth:18.1.0'
     implementation 'com.google.firebase:firebase-database:18.0.1'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
 }
 
 apply plugin: 'com.android.application'
@@ -40,3 +41,4 @@ android {
 
 // Add the following line to the bottom of the file:
 apply plugin: 'com.google.gms.google-services'  // Google Play services Gradle plugin
+
