@@ -27,19 +27,18 @@ public class DealAdapter extends RecyclerView.Adapter<DealAdapter.DealViewHolder
     private ChildEventListener mChildListener;
 
     public DealAdapter(){
-        FirebaseUtil.openFbReference("traveldeals");
+        FirebaseUtil.openFbReference("traveldeals", null);
         mFirebaseDatabase = FirebaseUtil.mFirebaseDatabase;
         mDatabaseReference = FirebaseUtil.mDatabaseReference;
         deals = FirebaseUtil.mDeals;
-        mChildListener = new ChildEventListener() {
+        ChildEventListener mChildEventLister = new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+//                TextView tvDeals = findViewById(R.id.tvDeals);
                 TravelDeal td = dataSnapshot.getValue(TravelDeal.class);
-                Log.d("Deal: ", td.getTitle());
                 td.setId(dataSnapshot.getKey());
                 deals.add(td);
-                notifyItemInserted(deals.size()-1);
-
+                notifyItemInserted(deals.size() - 1);
             }
 
             @Override
@@ -62,8 +61,9 @@ public class DealAdapter extends RecyclerView.Adapter<DealAdapter.DealViewHolder
 
             }
         };
-        mDatabaseReference.addChildEventListener(mChildListener);
+        mDatabaseReference.addChildEventListener(mChildEventLister);
     }
+
 
     @NonNull
     @Override
